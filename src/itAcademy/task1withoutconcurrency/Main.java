@@ -2,7 +2,7 @@ package itAcademy.task1withoutconcurrency;
 
 
 public class Main {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         StartingThreads startingThreads = new StartingThreads();
         startingThreads.getInputData();
         long startTime = System.currentTimeMillis();

@@ -31,9 +31,10 @@ public class StartingCollectionPerThread extends StartingThreads {
                 addToCollection(futureTasks[i].get());
             }
         } catch (InterruptedException e) {
+            e.printStackTrace();
 
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
 
 

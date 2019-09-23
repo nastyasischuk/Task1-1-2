@@ -24,7 +24,7 @@ public class StartingOneCollection extends StartingThreads {
             for (Thread thread : threads)
                 thread.join();
         } catch (InterruptedException e) {
-
+            e.printStackTrace();
         }
     }
 }

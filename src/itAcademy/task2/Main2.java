@@ -3,16 +3,27 @@ package itAcademy.task2;
 import itAcademy.threads.StartingThreads;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Main2 {
     public static void main(String[] args) {
+      
+        Set<Integer> globalCollection = ConcurrentHashMap.newKeySet();
+        StartingThreads startingThread = new StartThreadsWithExecutors(globalCollection);
+       startAndCountTime(new StartThreadsWithExecutors(globalCollection));
+       StartingThreads startingThread2 =  new StartExecutorsCollectionPerThread();
+        startAndCountTime(startingThread2);
+
+printResultCollections(globalCollection);
+printResultCollections(startingThread2.getPrimeNumbers());
+    }
+    public static void startAndCountTime(StartingThreads startingThreads){
         double startTime;
         double timeSpent;
-        Set<Integer> set = ConcurrentHashMap.newKeySet();
-        StartingThreads startingThread = new StartThreadsWithExecutors(set);
+        StartingThreads startingThread = startingThreads;
         startingThread.getInputData();
 
         startTime = System.currentTimeMillis();
@@ -20,22 +31,11 @@ public class Main2 {
         startingThread.executeAllThreads();
         timeSpent = System.currentTimeMillis() - startTime;
         System.out.println("Time "+timeSpent);
+    }
 
-       StartingThreads startingThread2 =  new StartExecutorsCollectionPerThread();
-       startingThread2.getInputData();
-       startTime = System.currentTimeMillis();
-       startingThread2.executeAllThreads();
-       timeSpent = System.currentTimeMillis() - startTime;
-       System.out.println("Time "+timeSpent);
-
-      System.out.println("First");
-      ArrayList<Integer> f = new ArrayList<>(set);
-      Collections.sort(f);
-      System.out.println(f);
-
-      System.out.println("Second");
-      ArrayList<Integer> f2 = new ArrayList<>(startingThread2.getPrimeNumbers());
-      Collections.sort(f);
-      System.out.println(f);
+    public static void printResultCollections(Collection<Integer> collection){
+        ArrayList<Integer> resultCollection = new ArrayList<>(collection);
+        Collections.sort(resultCollection);
+        System.out.println(resultCollection);
     }
 }
